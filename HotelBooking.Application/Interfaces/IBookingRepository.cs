@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HotelBooking.Application.Interfaces
 {
-    internal interface IBookingRepository
+    public interface IBookingRepository
     {
     }
 }
