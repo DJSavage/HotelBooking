@@ -15,7 +15,7 @@ namespace HotelBooking.Application.Services
         public Task<Booking?> GetByReferenceAsync(string reference)
         => _bookingService.GetByReferenceAsync(reference);
 
-        public Task AddAsync(Booking? booking)
-        => _bookingService.AddAsync(booking);
+        public Task<Booking> CreateBookingAsync(int RoomId, DateOnly StartDate, DateOnly EndDate, int Guests)
+        => _bookingService.CreateBookingAsync(RoomId, StartDate, EndDate, Guests);
     }
 }

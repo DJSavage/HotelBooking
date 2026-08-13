@@ -9,6 +9,6 @@ namespace HotelBooking.Application.Interfaces
     {
         Task<Booking?> GetByReferenceAsync(string reference);
 
-        Task AddAsync(Booking? booking);
+        Task<Booking> CreateBookingAsync(int RoomId, DateOnly StartDate, DateOnly EndDate, int Guests);
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HotelBooking.Application.Interfaces
 {
-    internal interface IRoomService
+    public interface IRoomService
     {
         Task<List<Room>> GetAllRoomsAsync(DateOnly start, DateOnly end, int guests);
     }
