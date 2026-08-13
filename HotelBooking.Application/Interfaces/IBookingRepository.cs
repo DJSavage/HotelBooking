@@ -8,6 +8,6 @@ namespace HotelBooking.Application.Interfaces
     public interface IBookingRepository
     {
         Task<Booking?> GetByReferenceAsync(string reference);
-        Task AddAsync(Booking booking);
+        Task CreateBookingAsync(Booking booking);
     }
 }

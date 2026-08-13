@@ -27,7 +27,7 @@ namespace HotelBooking.Infrastructure.Repositories
                   .FirstOrDefaultAsync(b => b.BookingReference == reference);
 
         //documentation: This method adds a new booking to the database.
-        public async Task AddAsync(Booking booking)
+        public async Task CreateBookingAsync(Booking booking)
         {
             _db.Bookings.Add(booking);
             await _db.SaveChangesAsync();
