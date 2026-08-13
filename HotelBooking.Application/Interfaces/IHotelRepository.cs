@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HotelBooking.Domain.Entities;
 
 namespace HotelBooking.Application.Interfaces
 {
     public interface IHotelRepository
     {
-     
+        Task<Hotel?> GetHotelByNameAsync(string name);
     }
 }

@@ -21,6 +21,11 @@ namespace HotelBooking.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        // <summary>
+        // Retrieves a hotel by its name, including its associated rooms.
+        // </summary>
+        // <param name="name">The name of the hotel to retrieve.</param>
+        // <returns>A Task representing the asynchronous operation, with the retrieved hotel or null if not found.</returns>
         public Task<Hotel?>GetHotelByNameAsync(string name)
             => _dbContext.Hotels
                 .Include(h => h.Rooms)

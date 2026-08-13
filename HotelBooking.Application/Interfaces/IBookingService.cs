@@ -1,10 +1,14 @@
-﻿using System;
+﻿using HotelBooking.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HotelBooking.Application.Interfaces
 {
-    internal interface IBookingService
+    public interface IBookingService
     {
+        Task<Booking?> GetByReferenceAsync(string reference);
+
+        Task AddAsync(Booking? booking);
     }
 }
