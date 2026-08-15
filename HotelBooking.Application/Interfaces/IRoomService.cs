@@ -8,5 +8,7 @@ namespace HotelBooking.Application.Interfaces
     public interface IRoomService
     {
         Task<List<Room>> GetAllRoomsAsync(DateOnly start, DateOnly end, int guests);
+
+        Task<Room?> GetRoomByIdAsync(int roomId);
     }
 }

@@ -14,6 +14,10 @@ namespace HotelBooking.Application.Services
 
         public Task<List<Room>> GetAllRoomsAsync(DateOnly start, DateOnly end, int guests)
         => _roomRepository.GetAvailableRoomsAsync(start, end, guests);
-        
+
+        public Task<Room?> GetRoomByIdAsync(int roomId)
+            => _roomRepository.GetRoomByIdAsync(roomId);
+
+
     }
 }

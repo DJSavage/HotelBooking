@@ -8,9 +8,10 @@ namespace HotelBooking.Application.Services
         private readonly IBookingRepository _bookingRepository;
         private readonly IRoomRepository _roomRepository;
 
-        public BookingService(IBookingRepository bookingRepository)
+        public BookingService(IBookingRepository bookingRepository, IRoomRepository roomRepository)
         {
             _bookingRepository = bookingRepository;
+            _roomRepository = roomRepository;
         }
 
         public Task<Booking?> GetByReferenceAsync(string reference)

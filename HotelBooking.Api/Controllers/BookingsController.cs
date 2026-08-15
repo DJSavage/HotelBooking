@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HotelBooking.Api.Models;
 using HotelBooking.Application.Interfaces;
-using HotelBooking.Api.Models;
+using HotelBooking.Application.Services;
+using HotelBooking.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBooking.Api.Controllers
 {
@@ -9,10 +11,14 @@ namespace HotelBooking.Api.Controllers
     public class BookingsController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+        private readonly IRoomService _roomService;
+        private readonly IRoomRepository _roomRepository;
 
-        public BookingsController(IBookingService bookingService)
+        public BookingsController(IBookingService bookingService, IRoomService roomService, IRoomRepository roomRepository)
         {
             _bookingService = bookingService;
+            _roomService = roomService;
+            _roomRepository = roomRepository;
         }
 
         // GET: api/bookings/{reference}
@@ -42,11 +48,29 @@ namespace HotelBooking.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking([FromBody] CreateBookingDto dto)
         {
+            if (dto.StartDate < DateOnly.FromDateTime(DateTime.Today))
+                return BadRequest("Start date cannot be in the past.");
+
+            if (dto.StartDate == dto.EndDate)
+                return BadRequest("Start and end dates cannot be the same.");
+
             if (dto.StartDate >= dto.EndDate)
                 return BadRequest("Start date must be before end date.");
 
             if (dto.Guests <= 0)
                 return BadRequest("Guests must be greater than zero.");
+
+            var room = await _roomService.GetRoomByIdAsync(dto.RoomId);
+            if (room is null)
+                return NotFound("Room does not exist.");
+
+            if (dto.Guests > room.Capacity)
+                return BadRequest("Guest count exceeds room capacity.");
+
+            var availableRooms = await _roomRepository.GetAvailableRoomsAsync(dto.StartDate, dto.EndDate, dto.Guests);
+
+            if (!availableRooms.Any(r => r.Id == dto.RoomId))
+                return BadRequest("Room is not available for the selected dates.");
 
             var booking = await _bookingService.CreateBookingAsync(
                 dto.RoomId,

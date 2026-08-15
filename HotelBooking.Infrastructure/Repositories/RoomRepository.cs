@@ -38,12 +38,20 @@ namespace HotelBooking.Infrastructure.Repositories
         public async Task<List<Room>> GetAvailableRoomsAsync(DateOnly start, DateOnly end, int guests)
         {
             return await _db.Rooms
+                .Include(r => r.Hotel)
                 .Include(r => r.Bookings)
                 .Where(r => r.Capacity >= guests)
                 .Where(r => r.Bookings.All(b =>
                     end <= b.StartDate || start >= b.EndDate))
                 .ToListAsync();
         }
-    }
 
+        public async Task<Room?> GetRoomByIdAsync(int roomId)
+        {
+            return await _db.Rooms
+                .Include(r => r.Bookings)
+                .FirstOrDefaultAsync(r => r.Id == roomId);
+        }
+
+    }
 }

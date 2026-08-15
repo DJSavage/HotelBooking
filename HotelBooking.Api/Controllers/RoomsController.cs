@@ -30,12 +30,16 @@ namespace HotelBooking.Api.Controllers
 
             var rooms = await _roomService.GetAllRoomsAsync(start, end, guests);
 
+            if (rooms.Count <= 0)
+                return BadRequest("No available rooms found for the specified criteria.");
+
             var result = rooms.Select(r => new RoomDto
             {
                 Id = r.Id,
                 Number = r.Number,
                 Capacity = r.Capacity,
-                RoomType = r.RoomType.ToString()
+                RoomType = r.RoomType.ToString(),
+                HotelName = r.Hotel.Name
             }).ToList();
 
             return Ok(result);
