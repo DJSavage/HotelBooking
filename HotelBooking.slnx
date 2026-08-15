@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="HotelBooking.Api.Tests/HotelBooking.Api.Tests.csproj" Id="16789214-882e-48e2-a2c8-88b64a5c6089" />
+    <Project Path="HotelBooking.Application.Tests/HotelBooking.Application.Tests.csproj" Id="e4a42c02-5902-45b8-a10f-5d3c55802a11" />
+    <Project Path="HotelBooking.Infrastructure.Tests/HotelBooking.Infrastructure.Tests.csproj" Id="73917c7f-64c4-48f9-85fe-67ae946618d1" />
+  </Folder>
   <Project Path="HotelBooking.Api/HotelBooking.Api.csproj" />
   <Project Path="HotelBooking.Application/HotelBooking.Application.csproj" />
   <Project Path="HotelBooking.Domain/HotelBooking.Domain.csproj" />

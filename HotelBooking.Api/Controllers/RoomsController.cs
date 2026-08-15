@@ -22,27 +22,37 @@ namespace HotelBooking.Api.Controllers
             [FromQuery] DateOnly end,
             [FromQuery] int guests)
         {
-            if (start >= end)
-                return BadRequest("Start date must be before end date.");
 
-            if (guests <= 0)
-                return BadRequest("Guests must be greater than zero.");
-
-            var rooms = await _roomService.GetAllRoomsAsync(start, end, guests);
-
-            if (rooms.Count <= 0)
-                return BadRequest("No available rooms found for the specified criteria.");
-
-            var result = rooms.Select(r => new RoomDto
+            try
             {
-                Id = r.Id,
-                Number = r.Number,
-                Capacity = r.Capacity,
-                RoomType = r.RoomType.ToString(),
-                HotelName = r.Hotel.Name
-            }).ToList();
+                if (start >= end)
+                    return BadRequest("Start date must be before end date.");
 
-            return Ok(result);
+                if (guests <= 0)
+                    return BadRequest("Guests must be greater than zero.");
+
+                var rooms = await _roomService.GetAllRoomsAsync(start, end, guests);
+
+                if (rooms.Count <= 0)
+                    return BadRequest("No available rooms found for the specified criteria.");
+
+                var result = rooms.Select(r => new RoomDto
+                {
+                    Id = r.Id,
+                    Number = r.Number,
+                    Capacity = r.Capacity,
+                    RoomType = r.RoomType.ToString(),
+                    HotelName = r.Hotel.Name
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An unexpected error occurred.");
+            }
+
+            
         }
     }
 }

@@ -19,25 +19,33 @@ namespace HotelBooking.Api.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> GetHotelByName(string name)
         {
-            var hotel = await _hotelService.GetHotelByNameAsync(name);
-
-            if (hotel is null)
-                return NotFound($"Hotel '{name}' not found.");
-
-            var result = new HotelDto
+            try
             {
-                Id = hotel.Id,
-                Name = hotel.Name,
-                Rooms = hotel.Rooms.Select(r => new RoomDto
-                {
-                    Id = r.Id,
-                    Number = r.Number,
-                    Capacity = r.Capacity,
-                    RoomType = r.RoomType.ToString()
-                }).ToList()
-            };
+                var hotel = await _hotelService.GetHotelByNameAsync(name);
 
-            return Ok(result);
+                if (hotel is null)
+                    return NotFound($"Hotel '{name}' not found.");
+
+                var result = new HotelDto
+                {
+                    Id = hotel.Id,
+                    Name = hotel.Name,
+                    Rooms = hotel.Rooms.Select(r => new RoomDto
+                    {
+                        Id = r.Id,
+                        Number = r.Number,
+                        Capacity = r.Capacity,
+                        RoomType = r.RoomType.ToString()
+                    }).ToList()
+                };
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An unexpected error occurred.");
+            }
+            
         }
     }
 }

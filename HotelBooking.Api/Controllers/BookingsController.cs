@@ -60,6 +60,9 @@ namespace HotelBooking.Api.Controllers
             if (dto.Guests <= 0)
                 return BadRequest("Guests must be greater than zero.");
 
+            if(dto.RoomId <= 0)
+                return BadRequest("RoomId must be greater than zero.");
+
             var room = await _roomService.GetRoomByIdAsync(dto.RoomId);
             if (room is null)
                 return NotFound("Room does not exist.");
@@ -69,7 +72,7 @@ namespace HotelBooking.Api.Controllers
 
             var availableRooms = await _roomRepository.GetAvailableRoomsAsync(dto.StartDate, dto.EndDate, dto.Guests);
 
-            if (!availableRooms.Any(r => r.Id == dto.RoomId))
+            if (availableRooms == null || !availableRooms.Any(r => r.Id == dto.RoomId))
                 return BadRequest("Room is not available for the selected dates.");
 
             var booking = await _bookingService.CreateBookingAsync(
