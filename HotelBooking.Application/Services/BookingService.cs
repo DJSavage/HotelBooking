@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Application.Interfaces;
 using HotelBooking.Domain.Entities;
 
+//documentation: This class implements the IBookingService interface and provides methods for managing hotel bookings, including creating new bookings and retrieving existing bookings by reference.
 namespace HotelBooking.Application.Services
 {
     public class BookingService : IBookingService
@@ -13,10 +14,13 @@ namespace HotelBooking.Application.Services
             _bookingRepository = bookingRepository;
             _roomRepository = roomRepository;
         }
-
+        //documentation: This method retrieves a booking by its reference from the booking repository.
         public Task<Booking?> GetByReferenceAsync(string reference)
         => _bookingRepository.GetByReferenceAsync(reference);
 
+        //documentation: This method creates a new booking for a specified room, date range, and number of guests.
+        //It first checks if the room is available for the given dates and guest count.
+        //If available, it generates a unique booking reference, creates the booking, and saves it to the repository.
         public async Task<Booking?> CreateBookingAsync(int roomId, DateOnly start, DateOnly end, int guests)
         {
             // Check availability
@@ -39,7 +43,8 @@ namespace HotelBooking.Application.Services
 
             return booking;
         }
-
+        
+        //documentation: This method generates a unique booking reference based on the room ID and start date.
         private string GenerateReference(int roomId, DateOnly startDate)
         {
             // Date part: 20260813 → YYMMDD

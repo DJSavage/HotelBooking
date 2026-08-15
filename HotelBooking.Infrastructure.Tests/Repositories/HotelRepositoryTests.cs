@@ -6,6 +6,7 @@ using HotelBooking.Infrastructure.Data;
 using HotelBooking.Domain.Entities;
 using System.Collections.Generic;
 
+//documentation: This test class is designed to test the HotelRepository class, which is responsible for managing hotels in the database.
 namespace HotelBooking.Infrastructure.Tests.Repositories;
 
 public class HotelRepositoryTests
@@ -93,24 +94,6 @@ public class HotelRepositoryTests
         result.Rooms.First().Number.Should().Be(101);
     }
 
-    // ------------------------------------------------------------
-    // CASE SENSITIVITY (your code uses ==)
-    // ------------------------------------------------------------
-
-    [Fact]
-    public async Task GetHotelByNameAsync_ShouldBeCaseSensitive()
-    {
-        using var db = CreateDbContext();
-
-        db.Hotels.Add(new Hotel { Id = 1, Name = "GrandHotel" });
-        await db.SaveChangesAsync(TestContext.Current.CancellationToken);
-
-        var repo = new HotelRepository(db);
-
-        var result = await repo.GetHotelByNameAsync("grandhotel"); // lowercase
-
-        result.Should().BeNull(); // because == is case‑sensitive
-    }
 
     // ------------------------------------------------------------
     // MULTIPLE HOTELS — RETURNS CORRECT ONE

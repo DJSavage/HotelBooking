@@ -3,10 +3,10 @@ using HotelBooking.Api.Controllers;
 using HotelBooking.Api.Models;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Domain.Entities;
-using HotelBooking.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
+//documentation: This test class is designed to test the BookingsController in the HotelBooking.Api project. It uses Moq to mock dependencies and FluentAssertions for assertions.
 namespace HotelBooking.Api.Tests.Controllers
 {
     public class BookingsControllerTests
@@ -17,6 +17,8 @@ namespace HotelBooking.Api.Tests.Controllers
 
         private readonly BookingsController _controller;
 
+        //documentation: The constructor initializes the mocks and the controller instance for testing.
+        // It sets up the necessary dependencies for the BookingsController.
         public BookingsControllerTests()
         {
             _bookingServiceMock = new Mock<IBookingService>();
@@ -30,6 +32,7 @@ namespace HotelBooking.Api.Tests.Controllers
             );
         }
 
+        //documentation: This test method checks the behavior of the CreateBooking action when the provided RoomId does not exist.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenRoomIdDoesNotExist()
         {
@@ -50,7 +53,7 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be($"Room does not exist.");
         }
 
-
+        //documentation: This test method checks the behavior of the CreateBooking action when the number of guests is zero.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenGuestsAreZero()
         {
@@ -71,6 +74,7 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be("Guests must be greater than zero.");
         }
 
+        //documentation: This test method checks the behavior of the CreateBooking action when the start date is in the past.   
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenStartDateIsInThePast()
         {
@@ -89,6 +93,7 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be("Start date cannot be in the past.");
         }
 
+        //documentation: This test method checks the behavior of the CreateBooking action when the start date is after the end date.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenStartDateAfterEndDate()
         {
@@ -106,6 +111,7 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be("Start date must be before end date.");
         }
 
+        //documentation: This test method checks the behavior of the CreateBooking action when the start date is equal to the end date.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenStartDateEqualsEndDate()
         {
@@ -123,6 +129,7 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be("Start and end dates cannot be the same.");
         }
 
+        //documentation: This test method checks the behavior of the CreateBooking action when the room is unavailable for the selected dates.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenRoomIsUnavailable()
         {
@@ -153,7 +160,8 @@ namespace HotelBooking.Api.Tests.Controllers
                   .Which.Value.Should().Be("Room is not available for the selected dates.");
         }
 
-
+        //documentation: This test method checks the behavior of the CreateBooking action when a booking is successfully created.
+        //It verifies that the response is a CreatedAtActionResult and that the returned BookingDto contains the expected values.
         [Fact]
         public async Task CreateBooking_ShouldReturnOk_WhenBookingIsCreated()
         {
@@ -161,9 +169,16 @@ namespace HotelBooking.Api.Tests.Controllers
             {
                 Id = 2,
                 Number = 101,
-                RoomType = RoomType.Double,
+                RoomTypeId = 2,
                 Capacity = 2,
-                Hotel = new Hotel { Name = "Test Hotel" }
+                Hotel = new Hotel { Name = "Test Hotel" },
+                RoomType = new RoomType
+                {
+                    Id = 2,
+                    Name = "Double",
+                    MaxGuests = 2,
+                    BasePrice = 80
+                }
             };
 
             var booking = new Booking
@@ -213,7 +228,7 @@ namespace HotelBooking.Api.Tests.Controllers
         }
 
 
-
+        //documentation: This test method checks the behavior of the CreateBooking action when the provided RoomId is zero.
         [Fact]
         public async Task CreateBooking_ShouldReturnBadRequest_WhenRoomIdIsZero()
         {

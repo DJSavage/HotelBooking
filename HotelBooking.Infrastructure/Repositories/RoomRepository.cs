@@ -38,6 +38,7 @@ namespace HotelBooking.Infrastructure.Repositories
         public async Task<List<Room>> GetAvailableRoomsAsync(DateOnly start, DateOnly end, int guests)
         {
             return await _db.Rooms
+                .Include(r => r.RoomType)
                 .Include(r => r.Hotel)
                 .Include(r => r.Bookings)
                 .Where(r => r.Capacity >= guests)

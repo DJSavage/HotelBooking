@@ -3,12 +3,14 @@ using HotelBooking.Api.Controllers;
 using HotelBooking.Api.Models;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Domain.Entities;
-using HotelBooking.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
 using Xunit;
 
+//documentation: This test class is designed to test the RoomsController in the HotelBooking API.
+//It uses Moq to mock the IRoomService dependency and FluentAssertions for expressive assertions.
+//The tests cover validation, empty results, successful results, and error handling scenarios.
 namespace HotelBooking.Api.Tests.Controllers;
 
 public class RoomsControllerTests
@@ -82,8 +84,15 @@ public class RoomsControllerTests
             Id = 1,
             Number = 101,
             Capacity = 2,
-            RoomType = RoomType.Double,
-            Hotel = new Hotel { Name = "Test Hotel" }
+            RoomTypeId = 2,
+            Hotel = new Hotel { Name = "Test Hotel" },
+            RoomType = new RoomType
+            {
+                Id = 2,
+                Name = "Double",
+                MaxGuests = 2,
+                BasePrice = 80
+            }
         };
 
         _roomServiceMock.Setup(s =>

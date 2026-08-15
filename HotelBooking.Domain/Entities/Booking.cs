@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+//documentation: This class represents a booking entity in the hotel booking domain.
+//It contains properties for the booking's unique identifier, reference, associated room, start and end dates, and number of guests.
 namespace HotelBooking.Domain.Entities
 {
     public class Booking

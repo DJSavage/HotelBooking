@@ -23,8 +23,10 @@ namespace HotelBooking.Infrastructure.Repositories
         public Task<Booking?> GetByReferenceAsync(string reference)
             => _db.Bookings
                   .Include(b => b.Room)
-                  .ThenInclude(r => r.Hotel)
-                  .FirstOrDefaultAsync(b => b.BookingReference == reference);
+            .ThenInclude(r => r.RoomType)
+        .Include(b => b.Room)
+            .ThenInclude(r => r.Hotel)
+        .FirstOrDefaultAsync(b => b.BookingReference == reference);
 
         //documentation: This method adds a new booking to the database.
         public async Task<Booking?> CreateBookingAsync(Booking booking)

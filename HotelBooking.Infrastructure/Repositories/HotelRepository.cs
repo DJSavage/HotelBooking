@@ -29,6 +29,7 @@ namespace HotelBooking.Infrastructure.Repositories
         public Task<Hotel?>GetHotelByNameAsync(string name)
             => _dbContext.Hotels
                 .Include(h => h.Rooms)
+            .ThenInclude(r => r.RoomType)
             .FirstOrDefaultAsync(h => h.Name == name);
     }
 }

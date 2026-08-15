@@ -7,7 +7,7 @@ using HotelBooking.Infrastructure.Data;
 using System.Collections.Generic;
 
 namespace HotelBooking.Infrastructure.Tests.Repositories;
-
+//documentation: This test class is designed to test the RoomRepository class, which is responsible for managing hotel rooms in the database.
 public class RoomRepositoryTests
 {
     private BookingDbContext CreateDbContext()
@@ -140,7 +140,14 @@ public class RoomRepositoryTests
         {
             Id = 1,
             Capacity = 2,
-            Hotel = hotel
+            Hotel = hotel,
+            RoomType = new RoomType
+            {
+                Id = 2,
+                Name = "Double",
+                MaxGuests = 2,
+                BasePrice = 80
+            }
         };
 
         db.Rooms.Add(room);

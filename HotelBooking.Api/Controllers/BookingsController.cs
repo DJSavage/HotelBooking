@@ -4,6 +4,7 @@ using HotelBooking.Application.Services;
 using HotelBooking.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+//documentation: This controller provides endpoints for managing hotel bookings, including retrieving booking details by reference and creating new bookings.
 namespace HotelBooking.Api.Controllers
 {
     [ApiController]
@@ -22,6 +23,8 @@ namespace HotelBooking.Api.Controllers
         }
 
         // GET: api/bookings/{reference}
+
+        // Retrieves booking details by booking reference.
         [HttpGet("{reference}")]
         public async Task<IActionResult> GetBookingByReference(string reference)
         {
@@ -38,13 +41,14 @@ namespace HotelBooking.Api.Controllers
                 Guests = booking.NumberOfGuests,
                 RoomId = booking.RoomId,
                 HotelName = booking.Room.Hotel.Name,
-                RoomType = booking.Room.RoomType.ToString()
+                RoomType = booking.Room.RoomType.Name
             };
 
             return Ok(result);
         }
 
         // POST: api/bookings
+        // Creates a new booking based on the provided booking details.
         [HttpPost]
         public async Task<IActionResult> CreateBooking([FromBody] CreateBookingDto dto)
         {
@@ -93,7 +97,7 @@ namespace HotelBooking.Api.Controllers
                 Guests = booking.NumberOfGuests,
                 RoomId = booking.RoomId,
                 HotelName = booking.Room.Hotel.Name,
-                RoomType = booking.Room.RoomType.ToString()
+                RoomType = booking.Room.RoomType.Name
             };
 
             return CreatedAtAction(nameof(GetBookingByReference),

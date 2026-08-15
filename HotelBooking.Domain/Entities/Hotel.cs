@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+//documentation: This class represents a hotel entity in the application, which contains information about the hotel and its rooms.
 namespace HotelBooking.Domain.Entities
 {
     public class Hotel

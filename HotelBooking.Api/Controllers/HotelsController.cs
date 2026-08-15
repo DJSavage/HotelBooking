@@ -2,6 +2,8 @@
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Api.Models;
 
+//documentation: This controller provides endpoints for managing hotels, including retrieving hotel details by name.
+//It interacts with the IHotelService to fetch hotel data and returns it in a structured format.
 namespace HotelBooking.Api.Controllers
 {
     [ApiController]
@@ -16,6 +18,7 @@ namespace HotelBooking.Api.Controllers
         }
 
         // GET: api/hotels/{name}
+        // Retrieves hotel details by hotel name.
         [HttpGet("{name}")]
         public async Task<IActionResult> GetHotelByName(string name)
         {
@@ -35,7 +38,8 @@ namespace HotelBooking.Api.Controllers
                         Id = r.Id,
                         Number = r.Number,
                         Capacity = r.Capacity,
-                        RoomType = r.RoomType.ToString()
+                        RoomType = r.RoomType.Name,
+                        RoomTypeId = r.RoomTypeId
                     }).ToList()
                 };
 

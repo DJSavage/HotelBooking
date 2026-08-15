@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//documentation: This interface defines the contract for a room service, which is responsible for managing hotel rooms in the application.
 namespace HotelBooking.Application.Interfaces
 {
     public interface IRoomService

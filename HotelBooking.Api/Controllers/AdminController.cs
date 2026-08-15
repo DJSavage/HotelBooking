@@ -1,9 +1,10 @@
 ﻿using HotelBooking.Domain.Entities;
-using HotelBooking.Domain.Enums;
 using HotelBooking.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
+//documentation: This controller provides administrative endpoints for managing the hotel booking database, including resetting and seeding the database with initial data.
 namespace HotelBooking.Api.Controllers
 {
     [ApiController]
@@ -45,12 +46,12 @@ namespace HotelBooking.Api.Controllers
         Name = "Grand Hotel",
         Rooms = new List<Room>
         {
-            new Room { Number = 101, RoomType = RoomType.Single, Capacity = 1 },
-            new Room { Number = 102, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 103, RoomType = RoomType.Deluxe, Capacity = 4 },
-            new Room { Number = 201, RoomType = RoomType.Deluxe, Capacity = 4 },
-            new Room { Number = 202, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 203, RoomType = RoomType.Single, Capacity = 1 },
+            new Room { Number = 101, RoomTypeId = 1, Capacity = 1 },
+            new Room { Number = 102, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 103, RoomTypeId = 3, Capacity = 4 },
+            new Room { Number = 201, RoomTypeId = 3, Capacity = 4 },
+            new Room { Number = 202, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 203, RoomTypeId = 1, Capacity = 1 },
         }
     },
 
@@ -59,13 +60,12 @@ namespace HotelBooking.Api.Controllers
         Name = "Ocean View Resort",
         Rooms = new List<Room>
         {
-            new Room { Number = 111, RoomType = RoomType.Single, Capacity = 1 },
-            new Room { Number = 112, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 113, RoomType = RoomType.Deluxe, Capacity = 3 },
-            new Room { Number = 211, RoomType = RoomType.Single, Capacity = 1 },
-            new Room { Number = 212, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 213, RoomType = RoomType.Deluxe, Capacity = 3 },
-
+            new Room { Number = 111, RoomTypeId = 1, Capacity = 1 },
+            new Room { Number = 112, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 113, RoomTypeId = 3, Capacity = 4 },
+            new Room { Number = 211, RoomTypeId = 1, Capacity = 1 },
+            new Room { Number = 212, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 213, RoomTypeId = 3, Capacity = 4 },
         }
     },
 
@@ -74,12 +74,12 @@ namespace HotelBooking.Api.Controllers
         Name = "Mountain Lodge",
         Rooms = new List<Room>
         {
-            new Room { Number = 310, RoomType = RoomType.Single, Capacity = 1 },
-            new Room { Number = 311, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 312, RoomType = RoomType.Deluxe, Capacity = 4 },
-            new Room { Number = 410, RoomType = RoomType.Single, Capacity = 1 },
-            new Room { Number = 411, RoomType = RoomType.Double, Capacity = 2 },
-            new Room { Number = 412, RoomType = RoomType.Deluxe, Capacity = 4 },
+            new Room { Number = 310, RoomTypeId = 1, Capacity = 1 },
+            new Room { Number = 311, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 312, RoomTypeId = 3, Capacity = 4 },
+            new Room { Number = 410, RoomTypeId = 1, Capacity = 1 },
+            new Room { Number = 411, RoomTypeId = 2, Capacity = 2 },
+            new Room { Number = 412, RoomTypeId = 3, Capacity = 4 },
         }
     }
 };

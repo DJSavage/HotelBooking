@@ -2,6 +2,7 @@
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Api.Models;
 
+//documentation: This controller provides endpoints for managing hotel rooms, including retrieving available rooms based on specified criteria such as date range and number of guests.
 namespace HotelBooking.Api.Controllers
 {
     [ApiController]
@@ -16,6 +17,7 @@ namespace HotelBooking.Api.Controllers
         }
 
         // GET: api/rooms/available?start=2025-01-01&end=2025-01-05&guests=2
+        // This endpoint retrieves a list of available rooms based on the specified start date, end date, and number of guests.
         [HttpGet("available")]
         public async Task<IActionResult> GetAvailableRooms(
             [FromQuery] DateOnly start,
@@ -41,8 +43,9 @@ namespace HotelBooking.Api.Controllers
                     Id = r.Id,
                     Number = r.Number,
                     Capacity = r.Capacity,
-                    RoomType = r.RoomType.ToString(),
-                    HotelName = r.Hotel.Name
+                    RoomType = r.RoomType.Name,
+                    HotelName = r.Hotel.Name,
+                    RoomTypeId = r.RoomTypeId
                 }).ToList();
 
                 return Ok(result);

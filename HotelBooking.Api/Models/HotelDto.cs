@@ -1,5 +1,6 @@
 ﻿namespace HotelBooking.Api.Models
 {
+    //documentation: This class represents a Data Transfer Object (DTO) for hotel information.
     public class HotelDto
     {
         public int Id { get; set; }

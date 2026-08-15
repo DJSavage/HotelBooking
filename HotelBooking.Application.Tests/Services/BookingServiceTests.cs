@@ -6,6 +6,10 @@ using HotelBooking.Application.Interfaces;
 using HotelBooking.Domain.Entities;
 using System.Collections.Generic;
 
+//documentation: This test class is designed to test the BookingService class, which is responsible for managing hotel bookings.
+//It uses Moq to create mock implementations of the IBookingRepository and IRoomRepository interfaces, allowing for isolated testing of the BookingService's behavior without relying on actual database operations.
+//The tests cover various scenarios, including retrieving bookings by reference, creating bookings under different conditions, and ensuring that the correct booking data is passed to the repository.
+
 namespace HotelBooking.Application.Tests.Services;
 
 public class BookingServiceTests
