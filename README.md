@@ -39,12 +39,18 @@ This repository is intended for learning, experimentation, and as a starting poi
 3. Configure the app
    - Update connection strings / settings in the API project's `appsettings.json` or user secrets if needed.
 
-4. Run the API
+4. Running the project after cloning (with EF Core migrations)
+   - The project includes a full migrations folder inside HotelBooking.Infrastructure.
+   - To create the database using these migrations, run:
+	- dotnet ef database update --project HotelBooking.Infrastructure --startup-project HotelBooking.Api
+   - This will create the database and apply all migrations.
+
+5. Run the API
    - From solution root:
 	 - dotnet run --project HotelBooking.Api
    - Or open the solution in Visual Studio 2026 and run the API project.
 
-5. Explore the API (recommended)
+6. Explore the API (recommended)
    - Swagger UI (recommended): when the API is running, open the Swagger UI at `http://localhost:{port}/swagger` to browse endpoints, view schemas, and execute requests interactively.
    - Alternatively use curl or Postman if you prefer, but Swagger gives an integrated interactive experience.
 
